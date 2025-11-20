@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ogã Virtual - Almas de Pombagira</title>
     <style>
-        /* --- ESTILO GERAL (Identidade: Almas) --- */
+        /* --- ESTILO GERAL --- */
         body {
-            background-color: #050505; /* Preto Absoluto */
-            color: #e0c097; /* Dourado Envelhecido */
+            background-color: #050505;
+            color: #e0c097;
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
             padding: 20px;
@@ -36,24 +36,24 @@
             font-style: italic;
         }
 
-        /* --- A LISTA DE MÚSICAS --- */
+        /* --- LISTA --- */
         .playlist-container {
-            max-width: 600px; /* Levemente mais largo para o vídeo horizontal */
+            max-width: 600px;
             margin: 0 auto;
         }
 
         .musica-item {
             background-color: #111;
             border: 1px solid #222;
-            margin-bottom: 12px;
-            border-radius: 6px;
+            margin-bottom: 8px; /* Menor espaço entre itens */
+            border-radius: 4px;
             overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        /* Botão do Título */
+        /* BOTÃO DO TÍTULO */
         .musica-titulo {
-            padding: 18px;
+            padding: 15px; /* Levemente menor */
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -72,19 +72,20 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 0.95em;
         }
 
         .icone-play {
-            font-size: 1.2em;
+            font-size: 1em;
             color: #b22222;
             transition: transform 0.3s ease;
         }
 
-        /* --- EFEITO DE BARRAS DE SOM (Equalizador) --- */
+        /* --- EQUALIZADOR (BARRINHAS) --- */
         .equalizer {
-            display: none; /* Escondido por padrão */
+            display: none;
             align-items: flex-end;
-            height: 15px;
+            height: 12px;
             gap: 2px;
             margin-left: 10px;
         }
@@ -94,7 +95,6 @@
             background-color: #b22222;
             animation: sound-bars 0.8s infinite ease-in-out;
         }
-
         .bar:nth-child(1) { animation-duration: 0.6s; height: 40%; }
         .bar:nth-child(2) { animation-duration: 0.8s; height: 80%; }
         .bar:nth-child(3) { animation-duration: 0.5s; height: 50%; }
@@ -105,7 +105,7 @@
             50% { transform: scaleY(1); }
         }
 
-        /* Conteúdo (Vídeo + Letra) */
+        /* CONTEÚDO (VÍDEO) */
         .musica-conteudo {
             max-height: 0;
             overflow: hidden;
@@ -113,12 +113,12 @@
             background-color: #000;
         }
 
-        /* --- O PLAYER (Horizontal 16:9) --- */
+        /* --- FORMATO ULTRA-WIDE (Mais horizontal e baixo) --- */
         .video-wrapper {
             position: relative;
             width: 100%;
-            /* Mudança crucial: 56.25% é a proporção 16:9 (Youtube Padrão), bem mais baixo que antes */
-            padding-top: 56.25%; 
+            /* 35% cria um aspecto bem horizontal (tipo faixa de cinema 21:9) */
+            padding-top: 35%; 
         }
 
         .video-wrapper iframe {
@@ -130,32 +130,19 @@
             border: none;
         }
 
-        .letra {
-            padding: 15px;
-            font-size: 0.9em;
-            color: #aaa;
-            border-top: 1px solid #222;
-            text-align: center;
-            font-style: italic;
-        }
-
-        /* Efeitos de Ativação */
+        /* EFEITOS ATIVOS */
         .ativo .musica-conteudo {
-            max-height: 600px; /* Altura suficiente para vídeo horizontal + letra */
+            max-height: 500px;
         }
-        
         .ativo .icone-play {
             transform: rotate(90deg);
             color: #fff;
         }
-        
         .ativo .musica-titulo {
             border-left: 3px solid #b22222;
             background: #1a0000;
             color: #fff;
         }
-
-        /* Mostra as barras de som quando ativo */
         .ativo .equalizer {
             display: flex;
         }
@@ -178,18 +165,13 @@
         <div class="musica-item">
             <div class="musica-titulo" onclick="toggleMusica(this)">
                 <div class="titulo-texto">
-                    <span>Laroyê Pombagira</span>
-                    <div class="equalizer">
-                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    </div>
+                    <span>Laroyê Pombagira (Agradecimento)</span>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
                 <span class="icone-play">➤</span>
             </div>
             <div class="musica-conteudo">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/bOfetOf9DaI?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="letra">Laroyê Pombagira eu vim agradecer...</div>
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/bOfetOf9DaI?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
             </div>
         </div>
 
@@ -197,17 +179,12 @@
             <div class="musica-titulo" onclick="toggleMusica(this)">
                 <div class="titulo-texto">
                     <span>Pombagira da Noite</span>
-                    <div class="equalizer">
-                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    </div>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
                 <span class="icone-play">➤</span>
             </div>
             <div class="musica-conteudo">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/RC_US2prJYs?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="letra">Axé!</div>
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/RC_US2prJYs?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
             </div>
         </div>
 
@@ -215,17 +192,12 @@
             <div class="musica-titulo" onclick="toggleMusica(this)">
                 <div class="titulo-texto">
                     <span>Ritual da Encruzilhada</span>
-                    <div class="equalizer">
-                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    </div>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
                 <span class="icone-play">➤</span>
             </div>
             <div class="musica-conteudo">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/10DwcvLoxrI?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="letra">Axé!</div>
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/10DwcvLoxrI?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
             </div>
         </div>
 
@@ -233,17 +205,12 @@
             <div class="musica-titulo" onclick="toggleMusica(this)">
                 <div class="titulo-texto">
                     <span>Noite de Pombagira</span>
-                    <div class="equalizer">
-                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    </div>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
                 <span class="icone-play">➤</span>
             </div>
             <div class="musica-conteudo">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/8cInvGRgB9w?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="letra">Axé!</div>
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/8cInvGRgB9w?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
             </div>
         </div>
 
@@ -251,17 +218,12 @@
             <div class="musica-titulo" onclick="toggleMusica(this)">
                 <div class="titulo-texto">
                     <span>Pombagira Chama</span>
-                    <div class="equalizer">
-                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    </div>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
                 <span class="icone-play">➤</span>
             </div>
             <div class="musica-conteudo">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/jTjHs5og2rc?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="letra">Axé!</div>
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/jTjHs5og2rc?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
             </div>
         </div>
 
@@ -269,35 +231,129 @@
             <div class="musica-titulo" onclick="toggleMusica(this)">
                 <div class="titulo-texto">
                     <span>Dama da Noite</span>
-                    <div class="equalizer">
-                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    </div>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
                 <span class="icone-play">➤</span>
             </div>
             <div class="musica-conteudo">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/xlHDyGK9ouU?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="letra">Axé!</div>
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/xlHDyGK9ouU?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
             </div>
         </div>
-        
+
         <div class="musica-item">
             <div class="musica-titulo" onclick="toggleMusica(this)">
                 <div class="titulo-texto">
                     <span>Caminho da Calunga</span>
-                    <div class="equalizer">
-                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    </div>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
                 <span class="icone-play">➤</span>
             </div>
             <div class="musica-conteudo">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/XSex5w1W2CY?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/XSex5w1W2CY?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+            </div>
+        </div>
+
+        <div class="musica-item">
+            <div class="musica-titulo" onclick="toggleMusica(this)">
+                <div class="titulo-texto">
+                    <span>Gira Mulambo Gira</span>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
-                <div class="letra">Axé!</div>
+                <span class="icone-play">➤</span>
+            </div>
+            <div class="musica-conteudo">
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/1mPMESy3-LY?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+            </div>
+        </div>
+
+        <div class="musica-item">
+            <div class="musica-titulo" onclick="toggleMusica(this)">
+                <div class="titulo-texto">
+                    <span>Rosa Caveira Chegou</span>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+                </div>
+                <span class="icone-play">➤</span>
+            </div>
+            <div class="musica-conteudo">
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/Qayjpt6EcVQ?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+            </div>
+        </div>
+
+        <div class="musica-item">
+            <div class="musica-titulo" onclick="toggleMusica(this)">
+                <div class="titulo-texto">
+                    <span>Todo Mundo Quer</span>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+                </div>
+                <span class="icone-play">➤</span>
+            </div>
+            <div class="musica-conteudo">
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/R1u7tp9XUrg?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+            </div>
+        </div>
+
+        <div class="musica-item">
+            <div class="musica-titulo" onclick="toggleMusica(this)">
+                <div class="titulo-texto">
+                    <span>Ela já vai Embora</span>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+                </div>
+                <span class="icone-play">➤</span>
+            </div>
+            <div class="musica-conteudo">
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/oDMZ24BflCU?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+            </div>
+        </div>
+
+        <div class="musica-item">
+            <div class="musica-titulo" onclick="toggleMusica(this)">
+                <div class="titulo-texto">
+                    <span>Quebra Demanda</span>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+                </div>
+                <span class="icone-play">➤</span>
+            </div>
+            <div class="musica-conteudo">
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/uC3Hxm3VCmc?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+            </div>
+        </div>
+
+        <div class="musica-item">
+            <div class="musica-titulo" onclick="toggleMusica(this)">
+                <div class="titulo-texto">
+                    <span>Ritual das Sete Velas</span>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+                </div>
+                <span class="icone-play">➤</span>
+            </div>
+            <div class="musica-conteudo">
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/2t0-S0AW-9M?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+            </div>
+        </div>
+
+        <div class="musica-item">
+            <div class="musica-titulo" onclick="toggleMusica(this)">
+                <div class="titulo-texto">
+                    <span>Fogo que me Queima</span>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+                </div>
+                <span class="icone-play">➤</span>
+            </div>
+            <div class="musica-conteudo">
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/dARZQgEwk1o?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+            </div>
+        </div>
+
+        <div class="musica-item">
+            <div class="musica-titulo" onclick="toggleMusica(this)">
+                <div class="titulo-texto">
+                    <span>Pombagira na Encruzilhada</span>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+                </div>
+                <span class="icone-play">➤</span>
+            </div>
+            <div class="musica-conteudo">
+                <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/fKBwjdaBzJc?enablejsapi=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
             </div>
         </div>
 
@@ -315,11 +371,9 @@
 
             // 1. FECHAR TODOS OS OUTROS e PARAR O SOM
             document.querySelectorAll('.musica-item').forEach(item => {
-                // Se não for o que clicamos, fecha
                 if (item !== itemClicado) {
                     item.classList.remove('ativo');
                     const iframe = item.querySelector('iframe');
-                    // Reseta o SRC removendo o autoplay para parar o som imediatamente
                     const srcLimpo = iframe.src.replace('&autoplay=1', '').replace('?autoplay=1', '');
                     iframe.src = srcLimpo;
                 }
@@ -327,12 +381,9 @@
 
             // 2. LÓGICA DO ITEM CLICADO
             if (!estaAberto) {
-                // Se estava fechado, abre e TOCA
                 itemClicado.classList.add('ativo');
-                // Adiciona autoplay na URL
                 iframeClicado.src += "&autoplay=1";
             } else {
-                // Se estava aberto e clicou de novo, fecha e PARA
                 itemClicado.classList.remove('ativo');
                 const srcLimpo = iframeClicado.src.replace('&autoplay=1', '').replace('?autoplay=1', '');
                 iframeClicado.src = srcLimpo;
