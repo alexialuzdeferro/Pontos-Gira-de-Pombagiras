@@ -1,824 +1,607 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ogã Virtual - Almas de Pombagira</title>
-    <style>
-        /* --- ESTILO GERAL --- */
-        body {
-            background-color: #050505; /* Preto Absoluto */
-            color: #e0c097; /* Dourado Envelhecido */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0; 
-            padding-bottom: 100px;
-            overflow-x: hidden; 
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌹 Almas de Pombagira 🔥</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* --- BARRA SOCIAL (GLASSMORPHISM) --- */
-        .social-dock-container {
-            position: sticky; 
-            top: 0;
-            z-index: 100;
-            background: rgba(10, 10, 10, 0.85); 
-            backdrop-filter: blur(15px); 
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(178, 34, 34, 0.3); 
-            padding: 12px 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-            width: 100%; 
-        }
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
 
-        .social-scroller {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto; 
-            padding: 0 20px;
-            -webkit-overflow-scrolling: touch; 
-            scrollbar-width: none; 
-            align-items: center;
-            
-            /* CENTRALIZAÇÃO HÍBRIDA */
-            width: fit-content; 
-            max-width: 100%;    
-            margin: 0 auto;     
-        }
+    /* Background místico com múltiplas camadas */
+    .mystical-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: 
+        radial-gradient(ellipse at 20% 30%, rgba(139, 0, 0, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(75, 0, 130, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.9) 0%, #000 100%);
+    }
 
-        .social-scroller::-webkit-scrollbar {
-            display: none;
-        }
+    .smoke-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+      background-image: 
+        radial-gradient(circle at 30% 40%, rgba(255, 0, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(139, 0, 0, 0.2) 0%, transparent 50%);
+      animation: smokeMove 20s ease-in-out infinite alternate;
+      z-index: 1;
+      pointer-events: none;
+    }
 
-        .social-btn {
-            width: 42px;
-            height: 42px;
-            min-width: 42px; 
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(178, 34, 34, 0.4); 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            position: relative;
-            color: #b22222 !important; 
-        }
+    @keyframes smokeMove {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+      50% { transform: translate(-20px, -30px) scale(1.1); opacity: 0.25; }
+      100% { transform: translate(20px, 30px) scale(0.95); opacity: 0.15; }
+    }
 
-        .social-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: #b22222; 
-            transition: all 0.3s;
-            stroke: none; 
-        }
-        
-        .social-btn.stroked svg {
-            fill: none;
-            stroke: #b22222;
-            stroke-width: 2;
-        }
+    /* Partículas flutuantes */
+    .particle {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: radial-gradient(circle, #ff0040, transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+      animation: float 15s infinite;
+      opacity: 0;
+    }
 
-        .social-btn:hover {
-            transform: translateY(-3px) scale(1.1);
-            background: rgba(178, 34, 34, 0.2); 
-            border-color: #ff0000;
-            box-shadow: 0 0 15px rgba(178, 34, 34, 0.6);
-        }
+    @keyframes float {
+      0%, 100% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+    }
 
-        .social-btn:hover svg {
-            fill: #ff4444;
-            filter: drop-shadow(0 0 5px #ff0000);
-        }
-        
-        .social-btn.stroked:hover svg {
-            stroke: #ff4444;
-            filter: drop-shadow(0 0 5px #ff0000);
-        }
+    /* Símbolos místicos rotativos */
+    .mystical-symbol {
+      position: fixed;
+      font-size: 120px;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1;
+      animation: rotateSymbol 40s linear infinite;
+      filter: blur(2px);
+    }
 
-        /* --- CONTEÚDO PRINCIPAL --- */
-        .main-content {
-            padding: 20px; 
-        }
+    @keyframes rotateSymbol {
+      from { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      to { transform: rotate(360deg) scale(1); }
+    }
 
-        h1 {
-            text-align: center;
-            font-weight: 100;
-            letter-spacing: 6px;
-            border-bottom: 1px solid #800000;
-            padding-bottom: 20px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-size: 1.8em;
-            background: -webkit-linear-gradient(#e0c097, #b22222);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(178, 34, 34, 0.3);
-            margin-top: 10px;
-        }
+    .container {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      padding: 60px 20px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-        .subtitulo {
-            text-align: center;
-            font-size: 0.9em;
-            color: #888;
-            margin-bottom: 50px;
-            font-style: italic;
-            letter-spacing: 2px;
-        }
+    /* Header dramático */
+    .header {
+      text-align: center;
+      margin-bottom: 70px;
+      position: relative;
+    }
 
-        /* --- CONTAINER DA LISTA --- */
-        .playlist-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    .header::before {
+      content: '🌹';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 50px;
+      animation: pulse 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(255, 0, 68, 0.8));
+    }
 
-        .musica-item {
-            background-color: #0a0a0a;
-            border: 1px solid #222;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
-        }
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+      50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+    }
 
-        .musica-item.ativo {
-            border-color: #b22222;
-            box-shadow: 0 0 15px rgba(178, 34, 34, 0.4);
-            transform: scale(1.02);
-            z-index: 10;
-        }
+    .main-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      margin: 20px 0;
+      background: linear-gradient(135deg, #ff0040, #ff6b9d, #ff0040);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 4s ease infinite;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      filter: drop-shadow(0 0 30px rgba(255, 0, 68, 0.6)) drop-shadow(0 0 60px rgba(139, 0, 0, 0.4));
+      position: relative;
+    }
 
-        .musica-titulo {
-            padding: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 500;
-            background: linear-gradient(90deg, #121212, #000);
-            border-left: 4px solid #333;
-            position: relative;
-            z-index: 2;
-        }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
 
-        .musica-titulo:hover {
-            background: #1a1a1a;
-        }
+    .subtitle {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: #ffb3d9;
+      letter-spacing: 3px;
+      margin: 15px 0;
+      text-shadow: 0 0 20px rgba(255, 0, 68, 0.5);
+    }
 
-        .musica-item.ativo .musica-titulo {
-            background: linear-gradient(90deg, #2b0505, #000);
-            border-left: 4px solid #ff0000;
-            color: #fff;
-        }
+    .call-to-action {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      color: #ffd700;
+      margin-top: 25px;
+      animation: glow 2.5s ease-in-out infinite;
+      letter-spacing: 2px;
+    }
 
-        .titulo-texto {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1; 
-        }
-        
-        .titulo-texto span {
-            display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 85%; 
-        }
+    @keyframes glow {
+      0%, 100% { 
+        text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ff0040;
+        opacity: 0.9;
+      }
+      50% { 
+        text-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700, 0 0 60px #ff0040;
+        opacity: 1;
+      }
+    }
 
-        .icone-play {
-            font-size: 1.2em;
-            color: #b22222;
-            transition: transform 0.3s ease;
-            min-width: 20px;
-            text-align: right;
-        }
-        
-        .musica-item.ativo .icone-play {
-            transform: rotate(90deg);
-            color: #fff;
-        }
+    /* Divisores de seção */
+    .section-divider {
+      position: relative;
+      width: 100%;
+      margin: 60px 0 35px;
+      padding: 20px 30px;
+      background: linear-gradient(135deg, rgba(139, 0, 0, 0.3), rgba(75, 0, 130, 0.2));
+      border-left: 4px solid #ff0040;
+      border-radius: 15px;
+      backdrop-filter: blur(20px);
+      box-shadow: 
+        0 8px 32px rgba(255, 0, 68, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(139, 0, 0, 0.3);
+      overflow: hidden;
+    }
 
-        /* EQUALIZADOR */
-        .equalizer {
-            display: flex;
-            align-items: flex-end;
-            height: 15px;
-            gap: 3px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            margin-left: auto; 
-        }
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 0, 68, 0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
 
-        .musica-item.ativo .equalizer {
-            opacity: 1;
-        }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
 
-        .bar {
-            width: 3px;
-            background-color: #b22222;
-            animation: pulse-music 0.8s infinite ease-in-out alternate;
-            border-radius: 2px; 
-            box-shadow: 0 0 5px #b22222;
-        }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 700;
+      color: #ffd700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      position: relative;
+      z-index: 1;
+    }
 
-        .bar:nth-child(1) { height: 60%; animation-delay: 0.1s; }
-        .bar:nth-child(2) { height: 30%; animation-delay: 0.3s; }
-        .bar:nth-child(3) { height: 90%; animation-delay: 0.0s; }
-        .bar:nth-child(4) { height: 50%; animation-delay: 0.4s; }
+    /* Grid de cards */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
 
-        @keyframes pulse-music {
-            0% { height: 20%; background-color: #500000; }
-            50% { height: 100%; background-color: #ff0000; }
-            100% { height: 40%; background-color: #800000; }
-        }
+    /* Cards super intensos */
+    .link-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(139, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
+      border: 2px solid rgba(255, 0, 68, 0.3);
+      border-radius: 20px;
+      padding: 30px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
 
-        .musica-conteudo {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.6s ease-in-out;
-            background-color: #080808;
-            display: flex;
-            flex-direction: column;
-        }
+    .link-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 0, 68, 0.4) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
 
-        .musica-item.ativo .musica-conteudo {
-            max-height: 800px; 
-        }
+    .link-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
 
-        .video-container {
-            width: 100%;
-            background: #000;
-            position: relative;
-        }
+    .link-card:hover::before {
+      opacity: 1;
+      animation: rotateBg 3s linear infinite;
+    }
 
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; 
-            box-shadow: inset 0 0 30px rgba(0,0,0,1); 
-        }
+    .link-card:hover::after {
+      transform: translateX(100%);
+    }
 
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+    @keyframes rotateBg {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
-        .letra {
-            padding: 20px;
-            font-size: 0.95em;
-            color: #ccc;
-            line-height: 1.6;
-            border-top: 1px solid #222;
-            white-space: pre-line;
-            font-style: italic;
-            text-align: center;
-            background: radial-gradient(circle at center, #150000, #050505);
-        }
+    .link-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: #ff0040;
+      box-shadow: 
+        0 20px 60px rgba(255, 0, 68, 0.5),
+        0 0 80px rgba(139, 0, 0, 0.4),
+        inset 0 0 30px rgba(255, 0, 68, 0.1);
+      background: linear-gradient(135deg, rgba(139, 0, 0, 0.6), rgba(75, 0, 130, 0.4));
+    }
 
-        @media (min-width: 768px) {
-            .musica-item.ativo .musica-conteudo {
-                flex-direction: row;
-                max-height: 350px;
-            }
-            .video-container {
-                width: 60%;
-                flex-shrink: 0;
-            }
-            .video-wrapper {
-                height: 100%;
-                padding-top: 0; 
-            }
-            .letra {
-                width: 40%;
-                overflow-y: auto;
-                border-top: none;
-                border-left: 1px solid #333;
-                text-align: left;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 30px;
-            }
-            .letra::-webkit-scrollbar { width: 6px; }
-            .letra::-webkit-scrollbar-track { background: #000; }
-            .letra::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
-        }
+    .link-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(255, 0, 68, 0.8));
+      transition: all 0.3s ease;
+    }
 
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            color: #444;
-            font-size: 0.75em;
-            border-top: 1px solid #111;
-            padding-top: 20px;
-        }
-    </style>
+    .link-card:hover .link-icon {
+      transform: scale(1.2) rotate(5deg);
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
+    }
+
+    .link-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #ffb3d9;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 10px rgba(255, 0, 68, 0.5);
+    }
+
+    .link-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 300;
+    }
+
+    /* Efeitos de chamas flutuantes */
+    .flame {
+      position: fixed;
+      width: 4px;
+      height: 80px;
+      background: linear-gradient(to top, transparent, #ff0040, #ffd700);
+      border-radius: 50% 50% 0 0;
+      animation: flicker 2.5s infinite alternate;
+      pointer-events: none;
+      z-index: 2;
+      filter: blur(1px);
+    }
+
+    @keyframes flicker {
+      0%, 100% { 
+        opacity: 0.6; 
+        transform: scaleY(1) translateY(0) scaleX(1); 
+      }
+      50% { 
+        opacity: 1; 
+        transform: scaleY(1.3) translateY(-10px) scaleX(1.2); 
+      }
+    }
+
+    /* Footer místico */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 60px;
+      border-top: 2px solid rgba(255, 0, 68, 0.3);
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .links-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .section-divider {
+        padding: 15px 20px;
+        margin: 40px 0 25px;
+      }
+
+      .container {
+        padding: 40px 15px 60px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- Canvas de fundo -->
+  <div class="mystical-canvas"></div>
+  <div class="smoke-layer"></div>
 
-    <!-- BARRA DE REDES SOCIAIS (FIXA NO TOPO) -->
-    <div class="social-dock-container">
-        <div class="social-scroller">
-            
-            <!-- TikTok 1 -->
-            <a href="https://www.tiktok.com/@espelhosdepombagira?lang=pt-BR" target="_blank" class="social-btn" title="TikTok Espelhos">
-                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-            </a>
+  <!-- Símbolos místicos -->
+  <div class="mystical-symbol" style="top: 5%; left: 8%;">🌹</div>
+  <div class="mystical-symbol" style="top: 60%; right: 10%;">🔥</div>
+  <div class="mystical-symbol" style="bottom: 15%; left: 12%;">💋</div>
+  <div class="mystical-symbol" style="top: 30%; right: 5%;">🗡️</div>
 
-            <!-- TikTok 2 -->
-            <a href="https://www.tiktok.com/@almasdepombagira?lang=pt-BR" target="_blank" class="social-btn" title="TikTok Almas">
-                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-            </a>
+  <div class="container">
+    <header class="header">
+      <h1 class="main-title">Almas de Pombagira</h1>
+      <p class="subtitle">Poder • Mistério • Transformação</p>
+      <p class="call-to-action">⚡ Entre nos Reinos do Fogo e da Rosa ⚡</p>
+    </header>
 
-            <!-- TikTok 3 -->
-            <a href="https://www.tiktok.com/@alexiarosadefogo?lang=pt-BR" target="_blank" class="social-btn" title="TikTok Alexia">
-                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-            </a>
+    <main>
+      <!-- Portais Sagrados -->
+      <div class="section-divider">
+        <h2 class="section-title">🌟 Portais Sagrados</h2>
+      </div>
+      <div class="links-grid">
+        <a href="https://alexialuzdeferro.github.io/Hub-Pombagiras/" class="link-card">
+          <span class="link-icon">🌟</span>
+          <div class="link-title">Hub Central</div>
+          <div class="link-description">Portal completo com todos os caminhos e conhecimentos reunidos</div>
+        </a>
+        <a href="https://alexialuzdeferro.github.io/almasdepombagira/" class="link-card">
+          <span class="link-icon">💫</span>
+          <div class="link-title">Almas Sagradas</div>
+          <div class="link-description">Conheça as histórias e a essência das entidades femininas de poder</div>
+        </a>
+        <a href="https://alexialuzdeferro.github.io/Pombagiras/" class="link-card">
+          <span class="link-icon">🌹</span>
+          <div class="link-title">Essência das Rainhas</div>
+          <div class="link-description">Explore as características e particularidades de cada linha</div>
+        </a>
+        <a href="https://pombagiras.my.canva.site/" class="link-card">
+          <span class="link-icon">📖</span>
+          <div class="link-title">Santuário Visual</div>
+          <div class="link-description">Galeria sagrada com imagens e arte devocional</div>
+        </a>
+        <a href="https://linktr.ee/alexiarosadefogo" class="link-card">
+          <span class="link-icon">🌳</span>
+          <div class="link-title">Árvore de Links</div>
+          <div class="link-description">Todos os caminhos reunidos em um só lugar</div>
+        </a>
+        <a href="https://bio.site/AlmasdePombagira" class="link-card">
+          <span class="link-icon">👤</span>
+          <div class="link-title">Bio Completa</div>
+          <div class="link-description">Perfil completo com toda a jornada e trabalhos desenvolvidos</div>
+        </a>
+      </div>
 
-            <!-- YouTube (Ícone Oficial Play) -->
-            <a href="https://www.youtube.com/@almasdepombagira" target="_blank" class="social-btn" title="YouTube">
-                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
+      <!-- Ferramentas Místicas -->
+      <div class="section-divider">
+        <h2 class="section-title">🔮 Ferramentas Místicas</h2>
+      </div>
+      <div class="links-grid">
+        <a href="https://alexialuzdeferro.github.io/oraculo-pombagiras/" class="link-card">
+          <span class="link-icon">🔮</span>
+          <div class="link-title">Oráculo Sagrado</div>
+          <div class="link-description">Consulte as cartas e receba mensagens das entidades</div>
+        </a>
+        <a href="https://alexialuzdeferro.github.io/Cartas-Rosa-e-Fogo/" class="link-card">
+          <span class="link-icon">🃏</span>
+          <div class="link-title">Cartas Rosa e Fogo</div>
+          <div class="link-description">Baralho exclusivo com a energia do amor e da transformação</div>
+        </a>
+        <a href="https://alexialuzdeferro.github.io/Quizz--Pombagiras-/" class="link-card">
+          <span class="link-icon">❓</span>
+          <div class="link-title">Quiz Místico</div>
+          <div class="link-description">Descubra qual Pombagira ressoa com sua energia e caminho</div>
+        </a>
+        <a href="https://alexialuzdeferro.github.io/Velas-Virtuais/" class="link-card">
+          <span class="link-icon">🕯️</span>
+          <div class="link-title">Velas Virtuais</div>
+          <div class="link-description">Acenda sua vela virtual e envie suas intenções ao plano espiritual</div>
+        </a>
+        <a href="https://alexialuzdeferro.github.io/Pontos-Gira-de-Pombagiras/" class="link-card">
+          <span class="link-icon">🎵</span>
+          <div class="link-title">Pontos de Gira</div>
+          <div class="link-description">Mergulhe nos pontos sagrados e cânticos que invocam a força das Pombagiras</div>
+        </a>
+      </div>
 
-            <!-- Instagram (Ícone Câmera Oficial) -->
-            <a href="https://www.instagram.com/almasdepombagira/?igsh=Y3VocnA2aDQxYjlw" target="_blank" class="social-btn" title="Instagram">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
+      <!-- Redes Sociais -->
+      <div class="section-divider">
+        <h2 class="section-title">📱 Redes Sociais</h2>
+      </div>
+      <div class="links-grid">
+        <a href="https://www.instagram.com/almasdepombagira/?igsh=Y3VocnA2aDQxYjlw" class="link-card">
+          <span class="link-icon">📷</span>
+          <div class="link-title">Instagram</div>
+          <div class="link-description">Conteúdo visual diário, rituais e ensinamentos sagrados</div>
+        </a>
+        <a href="https://www.youtube.com/@almasdepombagira" class="link-card">
+          <span class="link-icon">▶️</span>
+          <div class="link-title">YouTube</div>
+          <div class="link-description">Vídeos completos, pontos cantados e ensinamentos profundos</div>
+        </a>
+        <a href="https://www.tiktok.com/@espelhosdepombagira?lang=pt-BR" class="link-card">
+          <span class="link-icon">🎬</span>
+          <div class="link-title">TikTok - Espelhos</div>
+          <div class="link-description">Vídeos místicos sobre os espelhos das Pombagiras</div>
+        </a>
+        <a href="https://www.tiktok.com/@almasdepombagira?lang=pt-BR" class="link-card">
+          <span class="link-icon">🎥</span>
+          <div class="link-title">TikTok - Almas</div>
+          <div class="link-description">Conhecimento rápido e transformador em vídeo</div>
+        </a>
+        <a href="https://www.tiktok.com/@alexiarosadefogo?lang=pt-BR" class="link-card">
+          <span class="link-icon">🔥</span>
+          <div class="link-title">TikTok - Rosa de Fogo</div>
+          <div class="link-description">Conteúdo pessoal e intenso sobre o caminho sagrado</div>
+        </a>
+        <a href="https://www.threads.com/@almasdepombagira" class="link-card">
+          <span class="link-icon">🧵</span>
+          <div class="link-title">Threads</div>
+          <div class="link-description">Reflexões e conversas sobre o caminho das Pombagiras</div>
+        </a>
+        <a href="https://br.pinterest.com/almasdepombagira/" class="link-card">
+          <span class="link-icon">📌</span>
+          <div class="link-title">Pinterest</div>
+          <div class="link-description">Inspirações visuais, altares e estética sagrada</div>
+        </a>
+        <a href="https://www.kwai.com/@AlmasdePombagira" class="link-card">
+          <span class="link-icon">⭐</span>
+          <div class="link-title">Kwai - Almas</div>
+          <div class="link-description">Vídeos curtos e impactantes sobre o universo místico</div>
+        </a>
+        <a href="https://www.kwai.com/@AlexiaRosadeFogo" class="link-card">
+          <span class="link-icon">🌺</span>
+          <div class="link-title">Kwai - Rosa de Fogo</div>
+          <div class="link-description">Conteúdo exclusivo e energia intensa em vídeos</div>
+        </a>
+      </div>
 
-            <!-- Threads (Ícone Oficial Corrigido) -->
-            <a href="https://www.threads.com/@almasdepombagira" target="_blank" class="social-btn" title="Threads">
-                <svg viewBox="0 0 24 24"><path d="M12.786 10.286c.928 0 1.428.572 1.428 1.429s-.5 1.428-1.428 1.428c-.858 0-1.286-.5-1.286-1.428s.428-1.429 1.286-1.429zm6.537-2.963c-.928-1.714-2.929-2.786-4.929-2.786-3.857 0-6.857 3-6.857 6.857s3 6.857 6.857 6.857c1.786 0 3.5-.643 4.786-1.786l1.357 1.357c-1.643 1.5-3.929 2.357-6.143 2.357C8.429 20.179 4 15.75 4 10.286S8.429.393 14.393.393c3.214 0 6.214 1.5 8.071 4.071l-.071.143c.857 1.5.786 5.357.786 6.5 0 1.857-.214 3.714-.929 5.5-.5 1.214-1.286 2.143-2.357 2.714-1.143.571-2.429.571-3.571.143-1.214-.429-2.143-1.357-2.571-2.5-.929 1.071-2.143 1.786-3.5 1.786-2.429 0-4.143-2-4.143-4.5 0-2.5 1.714-4.5 4.143-4.5 1.5 0 2.857.857 3.571 2.143.071-.857.071-1.714.071-2.571 0-1.5-.571-2.429-1.786-2.429-1.214 0-2.429.786-3 1.929l-1.643-1zm-1.214 6.214c0-.5-.143-1.071-.429-1.5-.286-.429-.714-.643-1.214-.643-.929 0-1.786.857-1.786 2.143s.857 2.143 1.786 2.143c.5 0 .929-.214 1.214-.643.286-.429.429-.929.429-1.5zm3.714 3.071c.571 0 1-.214 1.214-.643.214-.429.357-1.071.357-1.786 0-.571 0-1.143-.071-1.714-.786.286-1.286 1.071-1.286 2.143 0 1.071.071 1.714-.214 2z"/></svg>
-            </a>
+      <!-- Comunidades -->
+      <div class="section-divider">
+        <h2 class="section-title">💬 Comunidades e Canais</h2>
+      </div>
+      <div class="links-grid">
+        <a href="https://discord.gg/gWZP8R7Dqu" class="link-card">
+          <span class="link-icon">💬</span>
+          <div class="link-title">Discord</div>
+          <div class="link-description">Junte-se à irmandade e compartilhe experiências em tempo real</div>
+        </a>
+        <a href="https://t.me/pomba_giras" class="link-card">
+          <span class="link-icon">✈️</span>
+          <div class="link-title">Telegram</div>
+          <div class="link-description">Canal exclusivo com mensagens e conteúdos diários</div>
+        </a>
+        <a href="https://whatsapp.com/channel/0029VbBs2AnJkK7J9J0nLr2G" class="link-card">
+          <span class="link-icon">💚</span>
+          <div class="link-title">WhatsApp Canal</div>
+          <div class="link-description">Receba atualizações e mensagens sagradas direto no seu celular</div>
+        </a>
+        <a href="https://www.meta.ai/c/alexiamelusine" class="link-card">
+          <span class="link-icon">🤖</span>
+          <div class="link-title">Meta AI</div>
+          <div class="link-description">Interações e conteúdo gerado por inteligência artificial</div>
+        </a>
+        <a href="https://chatgpt.com/g/g-alexialuzdeferro" class="link-card">
+          <span class="link-icon">✨</span>
+          <div class="link-title">ChatGPT Profile</div>
+          <div class="link-description">Criações e conversas místicas através de IA</div>
+        </a>
+      </div>
+    </main>
 
-            <!-- Kwai 1 -->
-            <a href="https://www.kwai.com/@AlmasdePombagira" target="_blank" class="social-btn" title="Kwai Almas">
-                <svg viewBox="0 0 24 24"><path d="M19.5,4.5h-15c-1.1,0-2,0.9-2,2v11c0,1.1,0.9,2,2,2h15c1.1,0,2-0.9,2-2v-11C21.5,5.4,20.6,4.5,19.5,4.5z M15,12c0,1.7-1.3,3-3,3s-3-1.3-3-3s1.3-3,3-3S15,10.3,15,12z M8,12c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4S8,14.2,8,12z"/></svg>
-            </a>
-
-            <!-- Kwai 2 -->
-            <a href="https://www.kwai.com/@AlexiaRosadeFogo" target="_blank" class="social-btn" title="Kwai Alexia">
-                <svg viewBox="0 0 24 24"><path d="M19.5,4.5h-15c-1.1,0-2,0.9-2,2v11c0,1.1,0.9,2,2,2h15c1.1,0,2-0.9,2-2v-11C21.5,5.4,20.6,4.5,19.5,4.5z M15,12c0,1.7-1.3,3-3,3s-3-1.3-3-3s1.3-3,3-3S15,10.3,15,12z M8,12c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4S8,14.2,8,12z"/></svg>
-            </a>
-
-            <!-- Meta AI (Ícone Infinito Oficial) -->
-            <a href="https://www.meta.ai/@alexiamelusine" target="_blank" class="social-btn" title="Meta AI">
-                <svg viewBox="0 0 24 24"><path d="M12.008 15.95c.55 0 1.09-.04 1.63-.14l.13-.02.1-.04c.69-.27 1.24-.75 1.59-1.4.56-1.03.36-2.25-.51-3.06-.5-.47-1.12-.73-1.8-.76h-.12c-.6 0-1.19.05-1.78.15l-.14.02-.1.04c-1.09.42-1.66 1.66-1.32 2.76.25.82.92 1.44 1.76 1.59l.14.03c.14.02.28.03.42.03zm10.62-2.13c-1.06 3.66-5.04 5.76-8.7 4.59-2.18-.7-3.94-2.34-4.86-4.53l-.03-.08c-.92-2.18-2.68-3.83-4.86-4.53C1.41 8.36-.07 10.14.02 13.05c.06 2.12 1.79 3.85 3.91 3.91 2.26.06 4.14-1.72 4.2-3.98.04-1.43-.75-2.75-2.03-3.38l-.09-.04c-.71-.33-1.53-.32-2.22.05-.46.25-.8.67-.95 1.17-.25.82.07 1.7.79 2.19.47.32 1.02.49 1.59.49h.23c2.03-.12 3.62-1.87 3.49-3.91-.1-1.6-1.25-2.96-2.82-3.33-1.84-.43-3.73.54-4.43 2.27-.54 1.33-.28 2.85.67 3.96.99 1.16 2.49 1.78 4.01 1.65h.14c1.54-.05 2.96-.86 3.8-2.15l.04-.05c.85-1.3 2.27-2.1 3.8-2.15h.14c1.52.12 3.03.75 4.01 1.65.96 1.11 1.21 2.63.67 3.96-.7 1.73-2.59 2.7-4.43 2.27-1.57-.37-2.72-1.73-2.82-3.33-.12-2.03 1.46-3.79 3.49-3.91h.23c.57 0 1.12-.17 1.59-.49.71-.49 1.04-1.37.79-2.19-.15-.5-.49-.92-.95-1.17-.69-.37-1.5-.38-2.22-.05l-.09.04c-1.28.63-2.07 1.95-2.03 3.38.06 2.26 1.94 4.04 4.2 3.98 2.12-.06 3.85-1.79 3.91-3.91.09-2.91-1.4-5.69-4.15-6.23z"/></svg>
-            </a>
-
-            <!-- Sora (Ícone Sparkles/Estrelas de IA) -->
-            <a href="https://sora.chatgpt.com/profile/alexialuzdeferro" target="_blank" class="social-btn" title="Sora">
-                <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z M5 5L6.5 9.5L11 11L6.5 12.5L5 17L3.5 12.5L-1 11L3.5 9.5L5 5Z M19 19L20.5 23.5L25 25L20.5 26.5L19 31L17.5 26.5L13 25L17.5 23.5L19 19Z" transform="translate(0 -2) scale(0.8)" /></svg>
-            </a>
-
-            <!-- Telegram -->
-            <a href="https://t.me/pomba_giras" target="_blank" class="social-btn stroked" title="Telegram">
-                <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
-            </a>
-
-            <!-- WhatsApp -->
-            <a href="https://whatsapp.com/channel/0029VbBs2AnJkK7J9J0nLr2G" target="_blank" class="social-btn" title="WhatsApp">
-                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            </a>
-
-            <!-- Discord -->
-            <a href="https://discord.gg/gWZP8R7Dqu" target="_blank" class="social-btn" title="Discord">
-                <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-2.05-9.18-4.98-13.686a.06.06 0 0 0-.031-.027zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-            </a>
-
-            <!-- Pinterest (Ícone "P" Oficial) -->
-            <a href="https://br.pinterest.com/almasdepombagira/" target="_blank" class="social-btn" title="Pinterest">
-                 <svg viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
-            </a>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <h1>Ogã Virtual</h1>
-        <div class="subtitulo">✧ 15 Pontos de Almas de Pombagira ✧</div>
-
-        <div class="playlist-container">
-
-            <!-- 1. Laroyê Pombagira -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Laroyê Pombagira (Agradecimento)</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/bOfetOf9DaI?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Laroyê Pombagira eu vim agradecer...
-                        Por cada encruzilhada que a senhora me fez vencer.
-                        Agradeço a proteção e a força no caminhar,
-                        Laroyê minha senhora, venha nos abençoar."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. Pombagira da Noite -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Pombagira da Noite</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/RC_US2prJYs?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Todo mundo quer, mas ela já vai embora...
-                        A lua brilha no céu, chegou a sua hora.
-                        Girando sua saia, levando a dor embora,
-                        Salve a Pombagira, Rainha da nossa história."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Ritual da Encruzilhada -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Ritual da Encruzilhada</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/10DwcvLoxrI?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "A de vermelho e negro o mistério traz,
-                        De colar de cor, ela pede paz.
-                        Na encruza fechada ela faz seu sinal,
-                        Protegendo seus filhos contra todo o mal."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Noite de Pombagira -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Noite de Pombagira</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/8cInvGRgB9w?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "A noite está escura, a lua clareou,
-                        Saravá Pombagira que aqui chegou.
-                        Com seu sorriso belo e seu olhar profundo,
-                        Ela vem girando para ajudar o mundo."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. Pombagira Chama -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Pombagira Chama</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/jTjHs5og2rc?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Pombagira rainha a morte se aproxima,
-                        Mas a vida renasce onde você caminha.
-                        Chama pelo nome, chama com fervor,
-                        Ela traz a cura e também o amor."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6. Dama da Noite -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Dama da Noite</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/xlHDyGK9ouU?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Pombagira Dama da Noite,
-                        Cai o dia e a tarde escurece.
-                        Quem tem fé nela não padece,
-                        Sua força e mistério resplandece."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 7. Caminho da Calunga -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Caminho da Calunga</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/XSex5w1W2CY?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Ela me disse assim,
-                        Filho eu te guiarei por onde você vá.
-                        Nos caminhos da calunga,
-                        Sua luz sempre há de brilhar."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 8. Gira Mulambo Gira -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Gira Mulambo Gira</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/1mPMESy3-LY?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Mulambo gira, gira neste congá...
-                        Vem trazendo força pra quem sabe esperar.
-                        Gira saia de chita, gira saia de fé,
-                        Saravá Dona Mulambo, mulher de muito axé."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 9. Rosa Caveira Chegou -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Rosa Caveira Chegou</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/Qayjpt6EcVQ?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Sacode o pó que chegou Rosa Caveira!
-                        Pombagira de fé, feiticeira guerreira.
-                        Na calunga pequena ela tem seu lugar,
-                        Vem na força das almas para trabalhar."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 10. Todo Mundo Quer -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Todo Mundo Quer</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/R1u7tp9XUrg?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Todo mundo quer, mas ela já vai embora...
-                        Sua risada ecoa rompendo a aurora.
-                        Deixa seu mistério e seu perfume no ar,
-                        Quem tem fé nela nunca vai fraquejar."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 11. Ela já vai Embora -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Ela já vai Embora</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/oDMZ24BflCU?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "A despedida é triste, mas necessária,
-                        Ela volta pra aanda, sua morada lendária.
-                        Fica a proteção e o axé que ela deixou,
-                        Saravá a Pombagira que nos abençoou."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 12. Quebra Demanda -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Quebra Demanda</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/uC3Hxm3VCmc?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "E meia noite a demanda me pegou...
-                        Mas Pombagira girou e tudo desmanchou.
-                        Com sua força e seu punhal de aço,
-                        Cortou a inveja e desfez todo o laço."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 13. Ritual das Sete Velas -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Ritual das Sete Velas</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/2t0-S0AW-9M?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Caixão fechado na meia lua,
-                        Sete chamas tremeluzindo na rua.
-                        O ritual é forte, é de proteção,
-                        Pombagira guarda meu coração."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 14. Fogo que me Queima -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Fogo que me Queima</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/dARZQgEwk1o?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Calunga chama na escuridão,
-                        Pemba traça meu chão.
-                        O fogo que queima não me faz mal,
-                        Pois tenho a guarda do povo do astral."
-                    </div>
-                </div>
-            </div>
-
-            <!-- 15. Pombagira na Encruzilhada -->
-            <div class="musica-item">
-                <div class="musica-titulo" onclick="toggleMusica(this)">
-                    <div class="titulo-texto">
-                        <span>Pombagira na Encruzilhada</span>
-                        <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                    </div>
-                    <span class="icone-play">➤</span>
-                </div>
-                <div class="musica-conteudo">
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <iframe data-src="https://www.youtube.com/embed/fKBwjdaBzJc?rel=0&modestbranding=1&controls=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="letra">
-                        "Pé na cruz da meia noite,
-                        Rosa cravada no cabelo.
-                        Ela é moça bonita e faceira,
-                        Rainha do meu terreiro."
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <footer>
-        Desenvolvido com Axé & Tecnologia - Todos os direitos reservados - Alexia Melusine <br> &copy; 2025
+    <footer class="footer">
+      <p>🌹 Almas de Pombagira • Onde o Fogo encontra a Rosa 🔥</p>
     </footer>
+  </div>
 
-    <script>
-        function toggleMusica(elemento) {
-            var itemAtual = elemento.parentElement;
-            var iframeAtual = itemAtual.querySelector('iframe');
-            var todosItens = document.querySelectorAll('.musica-item');
-            var isAtivo = itemAtual.classList.contains('ativo');
+  <script>
+    // Criar partículas flutuantes
+    function createParticles() {
+      const particleCount = 30;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+        document.body.appendChild(particle);
+      }
+    }
 
-            // 1. FECHAR TODOS OS OUTROS E PARAR MÚSICA
-            todosItens.forEach(item => {
-                if(item !== itemAtual) {
-                    item.classList.remove('ativo');
-                    // Reseta o src para parar o vídeo de fundo
-                    var iframe = item.querySelector('iframe');
-                    if(iframe && iframe.getAttribute('src')) {
-                        iframe.setAttribute('src', ''); 
-                    }
-                }
-            });
+    // Criar chamas
+    function createFlames() {
+      const flameCount = 20;
+      const container = document.body;
+      
+      for (let i = 0; i < flameCount; i++) {
+        const flame = document.createElement('div');
+        flame.className = 'flame';
+        flame.style.left = (Math.random() * 100) + '%';
+        flame.style.top = (Math.random() * 100) + '%';
+        flame.style.animationDelay = (Math.random() * 2) + 's';
+        flame.style.animationDuration = (2 + Math.random() * 2) + 's';
+        container.appendChild(flame);
+      }
+    }
 
-            // 2. LÓGICA DE TOGGLE (ABRIR/FECHAR O ATUAL)
-            if (!isAtivo) {
-                // ABRINDO
-                itemAtual.classList.add('ativo');
-                
-                // Scroll suave para o item aberto (para não ficar escondido pela barra superior)
-                setTimeout(() => {
-                    var headerOffset = 70; // Altura da barra social
-                    var elementPosition = itemAtual.getBoundingClientRect().top;
-                    var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                  
-                    window.scrollTo({
-                         top: offsetPosition,
-                         behavior: "smooth"
-                    });
-                }, 300);
-                
-                // Pega o link original do data-src e adiciona autoplay
-                var baseUrl = iframeAtual.getAttribute('data-src');
-                iframeAtual.setAttribute('src', baseUrl + "&autoplay=1");
-                
-            } else {
-                // FECHANDO
-                itemAtual.classList.remove('ativo');
-                // Limpa o src para parar a música imediatamente
-                iframeAtual.setAttribute('src', '');
-            }
-        }
-    </script>
+    // Inicializar efeitos
+    createParticles();
+    createFlames();
 
+    // Efeito parallax suave no mouse
+    document.addEventListener('mousemove', (e) => {
+      const moveX = (e.clientX / window.innerWidth - 0.5) * 20;
+      const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+      
+      document.querySelectorAll('.mystical-symbol').forEach((symbol, index) => {
+        const speed = (index + 1) * 0.5;
+        symbol.style.transform = `translate(${moveX * speed}px, ${moveY * speed}px) rotate(${index * 45}deg)`;
+      });
+    });
+  </script>
 </body>
 </html>
+
+<!-- Inicio codigo Contador -->
+<div align="center"><a title="contador de dias" href="https://www.calendario.cnt.br/ferramentas/contador-de-dias-calculadora-prazo-entre-datas"><img src="https://contador-gratis.com/contadores-de-visitas/201125034007374.gif"></a><div><a href="https://www.contador-gratis.com/" title="contador de visitas">Contador de Visitas</a></div></div>
+<!-- Fim do codigo Contador -->
