@@ -11,34 +11,40 @@
             color: #e0c097; /* Dourado Envelhecido */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 0; /* Removido padding global para o menu fixo funcionar bem */
+            padding: 0; 
             padding-bottom: 100px;
-            overflow-x: hidden; /* Evita rolagem lateral da página */
+            overflow-x: hidden; 
         }
 
         /* --- BARRA SOCIAL (GLASSMORPHISM) --- */
         .social-dock-container {
-            position: sticky; /* Fixa no topo ao rolar */
+            position: sticky; 
             top: 0;
             z-index: 100;
-            background: rgba(10, 10, 10, 0.7); /* Fundo escuro semi-transparente */
-            backdrop-filter: blur(12px); /* Efeito de vidro fosco (iPhone style) */
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 10, 10, 0.85); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(178, 34, 34, 0.3); 
             padding: 12px 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+            width: 100%; 
         }
 
         .social-scroller {
             display: flex;
             gap: 12px;
-            overflow-x: auto; /* Permite rolagem horizontal */
+            overflow-x: auto; 
             padding: 0 20px;
-            -webkit-overflow-scrolling: touch; /* Rolagem suave no iOS */
-            scrollbar-width: none; /* Esconde barra de rolagem no Firefox */
+            -webkit-overflow-scrolling: touch; 
+            scrollbar-width: none; 
+            align-items: center;
+            
+            /* CENTRALIZAÇÃO HÍBRIDA */
+            width: fit-content; 
+            max-width: 100%;    
+            margin: 0 auto;     
         }
 
-        /* Esconde barra de rolagem no Chrome/Safari */
         .social-scroller::-webkit-scrollbar {
             display: none;
         }
@@ -46,49 +52,53 @@
         .social-btn {
             width: 42px;
             height: 42px;
-            min-width: 42px; /* Impede achatar */
+            min-width: 42px; 
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(178, 34, 34, 0.4); 
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
             text-decoration: none;
             position: relative;
+            color: #b22222 !important; 
         }
 
         .social-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: #e0c097; /* Cor padrão dourada */
-            transition: fill 0.3s;
+            width: 22px;
+            height: 22px;
+            fill: #b22222; 
+            transition: all 0.3s;
+            stroke: none; 
+        }
+        
+        .social-btn.stroked svg {
+            fill: none;
+            stroke: #b22222;
+            stroke-width: 2;
         }
 
-        /* Efeito Hover e Cores das Marcas */
         .social-btn:hover {
             transform: translateY(-3px) scale(1.1);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            background: rgba(178, 34, 34, 0.2); 
+            border-color: #ff0000;
+            box-shadow: 0 0 15px rgba(178, 34, 34, 0.6);
         }
 
-        /* Cores Específicas no Hover */
-        .social-btn.tiktok:hover svg { fill: #ff0050; filter: drop-shadow(2px 0 0 #00f2ea); }
-        .social-btn.youtube:hover svg { fill: #FF0000; }
-        .social-btn.instagram:hover svg { fill: #E1306C; }
-        .social-btn.threads:hover svg { fill: #ffffff; }
-        .social-btn.meta:hover svg { fill: #0084ff; }
-        .social-btn.sora:hover svg { fill: #10a37f; }
-        .social-btn.telegram:hover svg { fill: #0088cc; }
-        .social-btn.whatsapp:hover svg { fill: #25D366; }
-        .social-btn.discord:hover svg { fill: #5865F2; }
-        .social-btn.pinterest:hover svg { fill: #E60023; }
-        .social-btn.kwai:hover svg { fill: #ff6c00; }
+        .social-btn:hover svg {
+            fill: #ff4444;
+            filter: drop-shadow(0 0 5px #ff0000);
+        }
+        
+        .social-btn.stroked:hover svg {
+            stroke: #ff4444;
+            filter: drop-shadow(0 0 5px #ff0000);
+        }
 
         /* --- CONTEÚDO PRINCIPAL --- */
         .main-content {
-            padding: 20px; /* Reaplica o padding que tiramos do body */
+            padding: 20px; 
         }
 
         h1 {
@@ -132,7 +142,6 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.5);
         }
 
-        /* Estado Ativo (Expandido) */
         .musica-item.ativo {
             border-color: #b22222;
             box-shadow: 0 0 15px rgba(178, 34, 34, 0.4);
@@ -140,7 +149,6 @@
             z-index: 10;
         }
 
-        /* --- CABEÇALHO DO ITEM --- */
         .musica-titulo {
             padding: 20px;
             cursor: pointer;
@@ -168,7 +176,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            flex: 1; /* Ocupa o espaço disponível */
+            flex: 1; 
         }
         
         .titulo-texto span {
@@ -176,10 +184,9 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 85%; /* Evita que texto longo quebre o layout no mobile */
+            max-width: 85%; 
         }
 
-        /* Ícone Play/Pause Animado */
         .icone-play {
             font-size: 1.2em;
             color: #b22222;
@@ -193,7 +200,7 @@
             color: #fff;
         }
 
-        /* --- EQUALIZADOR GRÁFICO (PULSE) --- */
+        /* EQUALIZADOR */
         .equalizer {
             display: flex;
             align-items: flex-end;
@@ -201,7 +208,7 @@
             gap: 3px;
             opacity: 0;
             transition: opacity 0.3s;
-            margin-left: auto; /* Empurra para a direita se houver espaço */
+            margin-left: auto; 
         }
 
         .musica-item.ativo .equalizer {
@@ -227,7 +234,6 @@
             100% { height: 40%; background-color: #800000; }
         }
 
-        /* --- CONTEÚDO (VÍDEO + LETRA) --- */
         .musica-conteudo {
             max-height: 0;
             overflow: hidden;
@@ -238,11 +244,9 @@
         }
 
         .musica-item.ativo .musica-conteudo {
-            max-height: 800px; /* Aumentado para garantir que tudo caiba */
+            max-height: 800px; 
         }
 
-        /* --- PLAYER VIDEO (Horizontalizado 16:9) --- */
-        /* O truque aqui é manter o container 16:9 para uniformidade */
         .video-container {
             width: 100%;
             background: #000;
@@ -252,8 +256,8 @@
         .video-wrapper {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio - FORÇA HORIZONTAL */
-            box-shadow: inset 0 0 30px rgba(0,0,0,1); /* Sombra interna para disfarçar bordas */
+            padding-top: 56.25%; 
+            box-shadow: inset 0 0 30px rgba(0,0,0,1); 
         }
 
         .video-wrapper iframe {
@@ -265,7 +269,6 @@
             border: none;
         }
 
-        /* --- ÁREA DA LETRA --- */
         .letra {
             padding: 20px;
             font-size: 0.95em;
@@ -278,7 +281,6 @@
             background: radial-gradient(circle at center, #150000, #050505);
         }
 
-        /* Layout Desktop */
         @media (min-width: 768px) {
             .musica-item.ativo .musica-conteudo {
                 flex-direction: row;
@@ -303,7 +305,6 @@
                 justify-content: center;
                 padding: 30px;
             }
-             /* Scrollbar fina */
             .letra::-webkit-scrollbar { width: 6px; }
             .letra::-webkit-scrollbar-track { background: #000; }
             .letra::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
@@ -325,74 +326,74 @@
     <div class="social-dock-container">
         <div class="social-scroller">
             
-            <!-- TikTok 1: Espelhos -->
-            <a href="https://www.tiktok.com/@espelhosdepombagira?lang=pt-BR" target="_blank" class="social-btn tiktok" title="TikTok Espelhos">
+            <!-- TikTok 1 -->
+            <a href="https://www.tiktok.com/@espelhosdepombagira?lang=pt-BR" target="_blank" class="social-btn" title="TikTok Espelhos">
                 <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
             </a>
 
-            <!-- TikTok 2: Almas -->
-            <a href="https://www.tiktok.com/@almasdepombagira?lang=pt-BR" target="_blank" class="social-btn tiktok" title="TikTok Almas">
+            <!-- TikTok 2 -->
+            <a href="https://www.tiktok.com/@almasdepombagira?lang=pt-BR" target="_blank" class="social-btn" title="TikTok Almas">
                 <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
             </a>
 
-            <!-- TikTok 3: Alexia -->
-            <a href="https://www.tiktok.com/@alexiarosadefogo?lang=pt-BR" target="_blank" class="social-btn tiktok" title="TikTok Alexia">
+            <!-- TikTok 3 -->
+            <a href="https://www.tiktok.com/@alexiarosadefogo?lang=pt-BR" target="_blank" class="social-btn" title="TikTok Alexia">
                 <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
             </a>
 
-            <!-- YouTube -->
-            <a href="https://www.youtube.com/@almasdepombagira" target="_blank" class="social-btn youtube" title="YouTube">
-                <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33zM9.75 15.02l5.75-3.27-5.75-3.27z"/></svg>
+            <!-- YouTube (Ícone Oficial Play) -->
+            <a href="https://www.youtube.com/@almasdepombagira" target="_blank" class="social-btn" title="YouTube">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
 
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/almasdepombagira/?igsh=Y3VocnA2aDQxYjlw" target="_blank" class="social-btn instagram" title="Instagram">
-                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <!-- Instagram (Ícone Câmera Oficial) -->
+            <a href="https://www.instagram.com/almasdepombagira/?igsh=Y3VocnA2aDQxYjlw" target="_blank" class="social-btn" title="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </a>
 
             <!-- Threads -->
-            <a href="https://www.threads.com/@almasdepombagira" target="_blank" class="social-btn threads" title="Threads">
+            <a href="https://www.threads.com/@almasdepombagira" target="_blank" class="social-btn" title="Threads">
                 <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10 10 10 0 0 0-10-10zm0 16a6 6 0 1 1 6-6 6 6 0 0 1-6 6zm0-10a4 4 0 1 0 4 4 4 4 0 0 0-4-4z"/></svg>
             </a>
 
-            <!-- Kwai 1 (Custom Icon) -->
-            <a href="https://www.kwai.com/@AlmasdePombagira" target="_blank" class="social-btn kwai" title="Kwai Almas">
-                <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8v8H8z" fill="currentColor"/></svg>
+            <!-- Kwai 1 -->
+            <a href="https://www.kwai.com/@AlmasdePombagira" target="_blank" class="social-btn" title="Kwai Almas">
+                <svg viewBox="0 0 24 24"><path d="M19.5,4.5h-15c-1.1,0-2,0.9-2,2v11c0,1.1,0.9,2,2,2h15c1.1,0,2-0.9,2-2v-11C21.5,5.4,20.6,4.5,19.5,4.5z M15,12c0,1.7-1.3,3-3,3s-3-1.3-3-3s1.3-3,3-3S15,10.3,15,12z M8,12c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4S8,14.2,8,12z"/></svg>
             </a>
 
-            <!-- Kwai 2 (Custom Icon) -->
-            <a href="https://www.kwai.com/@AlexiaRosadeFogo" target="_blank" class="social-btn kwai" title="Kwai Alexia">
-                <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8v8H8z" fill="currentColor"/></svg>
+            <!-- Kwai 2 -->
+            <a href="https://www.kwai.com/@AlexiaRosadeFogo" target="_blank" class="social-btn" title="Kwai Alexia">
+                <svg viewBox="0 0 24 24"><path d="M19.5,4.5h-15c-1.1,0-2,0.9-2,2v11c0,1.1,0.9,2,2,2h15c1.1,0,2-0.9,2-2v-11C21.5,5.4,20.6,4.5,19.5,4.5z M15,12c0,1.7-1.3,3-3,3s-3-1.3-3-3s1.3-3,3-3S15,10.3,15,12z M8,12c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4S8,14.2,8,12z"/></svg>
             </a>
 
-            <!-- Meta AI -->
-            <a href="https://www.meta.ai/@alexiamelusine" target="_blank" class="social-btn meta" title="Meta AI">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+            <!-- Meta AI (Ícone Infinito) -->
+            <a href="https://www.meta.ai/@alexiamelusine" target="_blank" class="social-btn" title="Meta AI">
+                <svg viewBox="0 0 24 24"><path d="M20.8 12.6c-1.1-.6-2.1-.8-3.1-.8-2.5 0-4.2 1.5-5.7 3.5-1.5-2-3.2-3.5-5.7-3.5-1 0-2 .2-3.1.8C1.6 13.5 0 15 0 16.8c0 2.5 3.1 4.2 6.3 4.2 2.5 0 4.8-1.3 6.3-3.2 1.5 1.9 3.8 3.2 6.3 3.2 3.2 0 6.3-1.7 6.3-4.2 0-1.8-1.6-3.3-3.1-4.2zM6.3 19c-1.6 0-3-1-3-2.2 0-.8.8-1.6 2-1.6 1.3 0 2.6 1.1 3.8 2.8-.8.6-1.8 1-2.8 1zm9.8-2.8c1.2-1.7 2.5-2.8 3.8-2.8 1.2 0 2 .8 2 1.6 0 1.2-1.4 2.2-3 2.2-1 0-2-.4-2.8-1z"/></svg>
             </a>
 
-            <!-- Sora/OpenAI -->
-            <a href="https://sora.chatgpt.com/profile/alexialuzdeferro" target="_blank" class="social-btn sora" title="Sora">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6v12M6 12h12"/></svg>
+            <!-- Sora (Ícone Estrela Mágica/Video Gen) -->
+            <a href="https://sora.chatgpt.com/profile/alexialuzdeferro" target="_blank" class="social-btn" title="Sora">
+                <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
             </a>
 
             <!-- Telegram -->
-            <a href="https://t.me/pomba_giras" target="_blank" class="social-btn telegram" title="Telegram">
-                <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <a href="https://t.me/pomba_giras" target="_blank" class="social-btn stroked" title="Telegram">
+                <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
             </a>
 
             <!-- WhatsApp -->
-            <a href="https://whatsapp.com/channel/0029VbBs2AnJkK7J9J0nLr2G" target="_blank" class="social-btn whatsapp" title="WhatsApp">
+            <a href="https://whatsapp.com/channel/0029VbBs2AnJkK7J9J0nLr2G" target="_blank" class="social-btn" title="WhatsApp">
                 <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             </a>
 
-            <!-- Discord -->
-            <a href="https://discord.gg/gWZP8R7Dqu" target="_blank" class="social-btn discord" title="Discord">
-                <svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M7.5 7.5c3.5-1 5.5-1 9 0 1.5-2.5 1.5-2.5 1.5-2.5C17 1 12 1 7 5c0 0 0 0 0 0 .5 0 .5 2.5.5 2.5zM3.5 20.5c2.5 2 5.5 2.5 5.5 2.5l1-1.5c-3-.5-4-1.5-4-1.5s.5.5 1.5.5c4 2 8 2 12 0 1 0 1.5-.5 1.5-.5s-1 1-4 1.5l1 1.5s3-.5 5.5-2.5c0 0 1.5-6 1.5-11 0 0-3-2-5.5-2.5 0 0-1 2-1.5 2.5 2.5.5 4 1.5 4 1.5s-1.5-1-4-1.5c-4-1-9-1-13 0-2.5.5-4 1.5-4 1.5s1.5-1 4-1.5c-.5-.5-1.5-2.5-1.5-2.5C6.5 4.5 3.5 6.5 3.5 6.5c0 5 1.5 11 1.5 11z"/></svg>
+            <!-- Discord (Corrigido: Com os "olhinhos") -->
+            <a href="https://discord.gg/gWZP8R7Dqu" target="_blank" class="social-btn" title="Discord">
+                <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-2.05-9.18-4.98-13.686a.06.06 0 0 0-.031-.027zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
             </a>
 
-            <!-- Pinterest -->
-            <a href="https://br.pinterest.com/almasdepombagira/" target="_blank" class="social-btn pinterest" title="Pinterest">
-                <svg viewBox="0 0 24 24"><line x1="8" y1="20" x2="12" y2="10"/><path d="M12 2a10 10 0 0 1 10 10c0 4-3 7-6 8 0 0 1-2 1-4v-5"/></svg>
+            <!-- Pinterest (Ícone "P" Oficial) -->
+            <a href="https://br.pinterest.com/almasdepombagira/" target="_blank" class="social-btn" title="Pinterest">
+                 <svg viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
             </a>
         </div>
     </div>
